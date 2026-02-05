@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life Stats</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="LifeStats.js"></script>
+    <script src="moment.js"></script>
+</head>
+<body>
+    <nav>
+        <a class="title" href="index.html">← Back</a>
+    </nav>
+    <div class="container">
+        <p>
+            Welcome to your life stats. 
+            <br><br>
+        </p>
+        <div class="datepicker">
+            <input onchange="age()" id="MyDay" type="number" value="13"/>
+            <input onchange="age()" id="MyMonth" type="number" value="08"/>
+            <input onchange="age()" id="MyYear" type="number" value="2005"/>
+        </div>
+        <br><br><br>
+        <button onclick="age()">Start</button>
+        <br>
+        <p class="result" id="result"></p>
+    </div>
+</body>
+</html>
