@@ -38,8 +38,36 @@ window.nachträglich = function () {
     const time = document.getElementById("nachträglichTime").value;
     const date = document.getElementById("nachträglichDate").value;
     const type = document.getElementById("einoderaus").value;
+    if (!date || !time) {
+        alert('Bitte Datum und Uhrzeit ausfüllen.');
+        return;
+    }
 
-    const timestamp = new Date(date + "T" + time + ":00").getTime();
+    const d = new Date(date);
+    if (Number.isNaN(d.getTime())) {
+        alert('Ungültiges Datum.');
+        return;
+    }
+
+    const parts = time.split(':');
+    if (parts.length < 2) {
+        alert('Ungültige Uhrzeit.');
+        return;
+    }
+
+    const hours = parseInt(parts[0], 10);
+    const minutes = parseInt(parts[1], 10);
+    if (Number.isNaN(hours) || Number.isNaN(minutes)) {
+        alert('Ungültige Uhrzeit.');
+        return;
+    }
+
+    d.setHours(hours, minutes, 0, 0);
+    const timestamp = d.getTime();
+    if (!isFinite(timestamp)) {
+        alert('Ungültiger Zeitpunkt.');
+        return;
+    }
 
     set(ref(database, user + "/" + date + "/" + timestamp), {
         user: user,
@@ -69,7 +97,6 @@ function berechneStunden(events) {
     }
   }
 
-  // ⏱️ noch eingestempelt → bis jetzt rechnen
   if (start) {
     totalMs += Date.now() - start;
   }
@@ -92,13 +119,8 @@ window.zeigeGesamtstunden = async function () {
     const user = document.getElementById("user").value;
 
     const snapshot = await get(ref(database, user));
-    if (!snapshot.exists()) {
-        document.getElementById("gesamtstunden").innerText = "Gesamt: 0 Std";
-        return;
-    }
 
-    const tageObjekt = snapshot.val(); // { "2026-02-05": {...}, "2026-02-06": {...}, ... }
-    let gesamt = 0;
+    const tageObjekt = snapshot.val();
 
     for (const tag in tageObjekt) {
         const events = Object.values(tageObjekt[tag])
