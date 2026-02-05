@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Einstempeln, Ausstempeln</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="script.js"></script>
+</head>
+<body>
+    <h1>Einstempeln, Ausstempeln</h1>
+    <p>
+        Willkommen bei "Einstempeln, Ausstempeln", Ihre <u>nicht SAP Software</u> 
+        zur Zeiterfassung
+    </p>
+    <br><br>
+    <center>
+        <h2>Nutzer auswählen</h2>
+        <select id="user">
+            <option value="maxi">Maxi</option>
+            <option value="tobi">Tobi</option>
+            <option value="oliver">Oliver</option>
+        </select>
+        <br><br>
+        <h2>Ein- oder Ausstempeln</h2>
+        <button onclick="einstempeln()">Einstempeln</button>
+        <button onclick="ausstempeln()">Ausstempeln</button>
+        <br><br>
+        <h2>Nachträglich stempeln</h2>
+        <input type="date" id="nachträglichDate"><br>
+        <input type="time" id="nachträglichTime"><br>
+        <select name="einoderaus" id="einoderaus">
+            <option value="einstempeln">Einstempeln</option>
+            <option value="ausstempeln">Ausstempeln</option>
+        </select><br>
+        <button onclick="nachträglich()">Zeit nachtragen</button>
+        <br><br>
+        <h2>Ergebnisse anzeigen</h2>
+        <button onclick="zeigeTagesstunden()">Tagesstunden</button>
+        <br><br>
+        <button onclick="zeigeGesamtstunden()">Gesamtstunden</button>
+    </center>
+</body>
+</html>
